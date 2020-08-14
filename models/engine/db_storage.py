@@ -1,13 +1,20 @@
 #!/usr/bin/python3
-"""New engine DBStorage"""
-import os 
+"""____"""
+import os
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm.scoping import scoped_session
 from sqlalchemy import create_engine
 from models.base_model import BaseModel, Base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import scoped_session
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class DBStorage:
+    """Class DBStorage"""
     __engine = None
     __session = None
     valid_classes = ["User", "State", "City", "Amenity", "Place", "Review"]
@@ -19,8 +26,7 @@ class DBStorage:
                                       ":" + os.environ['HBNB_MYSQL_PWD'] +
                                       "@" + os.environ['HBNB_MYSQL_HOST'] +
                                       ":3306/" +
-                                      os.environ['HBNB_MYSQL_DB'],
-                                      pool_pre_ping=True)
+                                      os.environ['HBNB_MYSQL_DB'])
 
         try:
             if os.environ['HBNB_MYSQL_ENV'] == "test":
@@ -29,7 +35,7 @@ class DBStorage:
             pass
 
     def all(self, cls=None):
-        """return all"""
+        """all"""
         storage = {}
         if cls is None:
             for cls_name in self.valid_classes:
@@ -44,26 +50,30 @@ class DBStorage:
         return storage
 
     def new(self, obj):
-        """add the a new object to the DB"""
+        """new"""
         self.__session.add(obj)
 
     def save(self):
-        """Commit the changes"""
-        try:
-            self.__session.commit()
-        except:
-            self.__session.rollback()
-        finally:
-            self.__session.close()
+        """save"""
+        self.__session.commit()
 
-    def delete(self, obj=None):
-        """Delete an object"""
-        if obj is None:
-            return
+    def update(self, cls, obj_id, key, new_value):
+        """update"""
+        res = self.__session.query(eval(cls)).filter(eval(cls).id == obj_id)
 
-        self.__session.delete(obj)
+        if res.count() == 0:
+            return 0
+
+        res.update({key: (new_value)})
+        return 1
 
     def reload(self):
+        """reload"""
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine)
-        self.__session = scoped_session(session_factory)
+        file_session = sessionmaker(bind=self.__engine)
+        self.__session = scoped_session(file_session)
+
+    def delete(self, obj=None):
+        """delete"""
+        if obj is None:
+            self.__session.delete(obj)
