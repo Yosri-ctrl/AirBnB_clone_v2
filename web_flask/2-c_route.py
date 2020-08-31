@@ -19,7 +19,7 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def C(text):
-    """method returns C"""
+    """method returns C + text"""
     return 'C {}'.format(text.replace('_', ' '))
 
 if __name__ == '__main__':
