@@ -1,10 +1,13 @@
-#0x04. AirBnB clone - Web framework
+# 0x04. AirBnB clone - Web framework
 
 
-##Learning Objectives
+
+
+
+## Learning Objectives
 
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
-###General
+### General
 
     What is a Web Framework
     How to build a web framework with Flask
@@ -17,8 +20,8 @@ At the end of this project, you are expected to be able to explain to anyone, wi
     How to create a dynamic template (loops, conditions…)
     How to display in HTML data from a MySQL database
 
-##Requirements
-###Python Scripts
+## Requirements
+### Python Scripts
 
     Allowed editors: vi, vim, emacs
     All your files will be interpreted/compiled on Ubuntu 14.04 LTS using python3 (version 3.4.3)
@@ -32,7 +35,7 @@ At the end of this project, you are expected to be able to explain to anyone, wi
     All your classes should have documentation (python3 -c 'print(__import__("my_module").MyClass.__doc__)')
     All your functions (inside and outside a class) should have documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
 
-###HTML/CSS Files
+### HTML/CSS Files
 
     Allowed editors: vi, vim, emacs
     All your files should end with a new line
