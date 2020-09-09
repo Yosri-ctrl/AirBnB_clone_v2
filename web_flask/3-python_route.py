@@ -18,8 +18,15 @@ def hello_HBNB():
 
 @app.route('/c/<string>')
 def hello_c(string):
+    """C is cool"""
     return "C {}".format(string.replace("_", " "))
 
+
+@app.route('/python/')
+@app.route('/python/<p>')
+def hello_python(p="is cool"):
+    """Python is cooler"""
+    return "Python {}".format(p.replace("_", " "))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
