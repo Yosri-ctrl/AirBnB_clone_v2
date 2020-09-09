@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Start a flak application"""
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
@@ -38,9 +38,7 @@ def number(num):
 
 @app.route('/number_template/<int:num>')
 def number_template(num):
-    """Check if it is a number"""
-    if type(num) == int:
-        return "{} is a number".format(num)
+    return render_template('5-number.html', num=num)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
